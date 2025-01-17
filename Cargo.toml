@@ -1,6 +1,6 @@
 [package]
 name = "cf-r2-sdk"
-version = "0.1.13"
+version = "0.1.14"
 authors = ["Myxogastria0808 <r.rstudio.c@gmail.com>"]
 description = "This package is an 'UNOFFICIAL' cloudflare r2 sdk."
 license = "MIT"
