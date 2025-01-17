@@ -32,7 +32,7 @@ let object = Builder::new()
 #### upload binary data
 
 ```rust
-object
+let _ = object
     .upload_binary("<file name (key)> as &str", "<mime type> as &str", "<binary data> as &[u8]")
     .await;
 ```
@@ -40,7 +40,7 @@ object
 #### upload file
 
 ```rust
-object
+let _ = object
     .upload_file("<file name (key)> as &str", "<mime type> as &str", "<file path> as &str")
     .await;
 ```
@@ -54,7 +54,7 @@ let binany: Vec<u8> = object.download("<file name (key)> as &str").await;
 #### delete file
 
 ```rust
-object.delete("<file name (key)> as &str").await;
+let _ = object.delete("<file name (key)> as &str").await;
 ```
 
 ## Sample
