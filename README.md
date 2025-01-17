@@ -62,7 +62,9 @@ object.delete("<file name (key)> as &str").await;
 
 ## Usage Sample
 
-Usage sample repository is https://github.com/Myxogastria0808/cf-r2-sdk-sample .
+Usage sample repository is
+
+https://github.com/Myxogastria0808/cf-r2-sdk-sample .
 
 ```rust
 use cf_r2_sdk::utils::builder::Builder;
