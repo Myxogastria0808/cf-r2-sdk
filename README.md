@@ -1,6 +1,6 @@
 # Cloudflare R2 Operation SDK
 
-## ⚠ This crate is under development ⚠
+### ⚠ This crate is under development (Error handling remains a simple implementation) ⚠
 
 This is the Cloudflare R2 Operation SDK.
 
@@ -14,9 +14,9 @@ https://github.com/Myxogastria0808/cf-r2-sdk-sample
 
 ### 1. Create a aws_sdk_s3::Client object.
 
-set the "bucket name", "access key id", "secret access key", "endpoint url", and "region".
+Set the "bucket name", "access key id", "secret access key", "endpoint url", and "region".
 
-default value of region is "auto".
+Default value of region is "auto" (region is option field).
 
 ```rust
 // create a client object
@@ -60,7 +60,7 @@ let binany: Vec<u8> = object.download("<file name (key)> as &str").await;
 object.delete("<file name (key)> as &str").await;
 ```
 
-## Usage
+## Usage Sample
 
 Usage sample repository is https://github.com/Myxogastria0808/cf-r2-sdk-sample .
 
