@@ -6,9 +6,9 @@
 //!
 //! # Struct
 //!
-//! [Builder](https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/builder/struct.Builder.html)
+//! [builder::Builder](https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/builder/struct.Builder.html)
 //!
-//! [Operator](https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/operator/struct.Operator.html)
+//! [operator::Operator](https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/operator/struct.Operator.html)
 //!
 //! # How to use
 //!
