@@ -6,6 +6,8 @@ This is the Cloudflare R2 Operation SDK.
 
 ## Usage
 
+Usage sample repository is [here](https://github.com/Myxogastria0808/cf-r2-sdk-sample).
+
 ```rust
 use cf_r2_sdk::utils::builder::Builder;
 use dotenvy::dotenv;
@@ -25,6 +27,7 @@ async fn main() {
         env::var("SECRET_ACCESS_KEY").expect("SECRET_ACCESS_KEY not found in .env file.");
     let region: String = env::var("REGION").expect("REGION not found in .env file.");
 
+    // create a client object
     let object = Builder::new()
         .set_bucket_name(bucket_name)
         .set_access_key_id(access_key_id)
@@ -33,10 +36,12 @@ async fn main() {
         .set_region(region)
         .create_client();
 
+    // upload a binary data
     object
         .upload_binary("text.txt", "text/plain", b"Hello, World!")
         .await;
 
+    // download data as binary
     let bin = object.download("text.txt").await;
 
     println!("{:?}", bin);
