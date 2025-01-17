@@ -1,4 +1,4 @@
-mod utils;
+pub mod utils;
 
 // use dotenvy::dotenv;
 // use std::env;
