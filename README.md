@@ -4,9 +4,61 @@
 
 This is the Cloudflare R2 Operation SDK.
 
+This crates can upload, download, and delete binary data or files to Cloudflare R2.
+
 ## Documentation
 
 https://github.com/Myxogastria0808/cf-r2-sdk-sample
+
+## How to use
+
+1. Create a aws_sdk_s3::Client object.
+
+set the "bucket name", "access key id", "secret access key", "endpoint url", and "region".
+
+default value of region is "auto".
+
+```rust
+// create a client object
+let object = Builder::new()
+    .set_bucket_name("bucket_name")
+    .set_access_key_id("access_key_id")
+    .set_secret_access_key("secret_access_key")
+    .set_endpoint("endpoint_url")
+    .set_region("region")
+    .create_client();
+...
+```
+
+2. Operate R2 object strage
+
+- upload binary data
+
+```rust
+object
+    .upload_binary("<file name (key)> as &str", "<mime type> as &str", "<binary data> as &[u8]")
+    .await;
+```
+
+- upload file
+
+```rust
+object
+    .upload_file("<file name (key)> as &str", "<mime type> as &str", "<file path> as &str")
+    .await;
+```
+
+- download binary data
+
+```rust
+let binany: Vec<u8> = object.download("<file name (key)> as &str").await;
+```
+
+- delete file
+
+```rust
+object.delete("<file name (key)> as &str").await;
+```
 
 ## Usage
 

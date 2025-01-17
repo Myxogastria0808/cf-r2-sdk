@@ -1,4 +1,4 @@
-use aws_sdk_s3::{error::SdkError, primitives::ByteStream};
+use aws_sdk_s3::primitives::ByteStream;
 use tokio::{fs::File, io::AsyncReadExt};
 
 #[derive(Debug)]
