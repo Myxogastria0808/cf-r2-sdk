@@ -6,7 +6,7 @@ This crates can upload, download, and delete binary data or files to Cloudflare 
 
 ## Documentation
 
-file:///home/hello/Desktop/cf-r2-sdk/target/doc/cf_r2_sdk/index.html
+https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/
 
 ## How to use
 
