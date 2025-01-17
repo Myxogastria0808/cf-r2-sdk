@@ -1,7 +1,5 @@
 # Cloudflare R2 Operation SDK
 
-### ⚠ This crate is under development (Error handling remains a simple implementation) ⚠
-
 This is the Cloudflare R2 Operation SDK.
 
 This crates can upload, download, and delete binary data or files to Cloudflare R2.
