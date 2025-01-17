@@ -4,9 +4,13 @@
 
 This is the Cloudflare R2 Operation SDK.
 
+## Documentation
+
+https://github.com/Myxogastria0808/cf-r2-sdk-sample
+
 ## Usage
 
-Usage sample repository is [here](https://github.com/Myxogastria0808/cf-r2-sdk-sample).
+Usage sample repository is [here](https://github.com/Myxogastria0808/cf-r2-sdk-sample) (https://github.com/Myxogastria0808/cf-r2-sdk-sample).
 
 ```rust
 use cf_r2_sdk::utils::builder::Builder;
