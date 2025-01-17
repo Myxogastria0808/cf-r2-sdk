@@ -1,0 +1,17 @@
+[package]
+name = "r2-unofficial-sdk"
+version = "0.0.1"
+authors = ["Myxogastria0808"]
+description = "This package is an 'UNOFFICIAL' cloudflare r2 sdk."
+license = "MIT"
+edition = "2024"
+exclude = ["flake.lock", ".env", ".env.example"]
+repository = "https://github.com/Myxogastria0808/r2-unofficial-sdk"
+
+[dependencies]
+aws-sdk-s3 = { version = "1.69.0", features = ["behavior-version-latest"] }
+dotenvy = "0.15.7"
+tokio = { version = "1.43.0", features = ["full"] }
+
+[dev-dependencies]
+
