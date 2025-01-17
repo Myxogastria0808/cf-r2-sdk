@@ -6,7 +6,7 @@ It can upload, download, and delete binary data or files to Cloudflare R2.
 
 This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2-rs) (License: [Apache-2.0](https://choosealicense.com/licenses/apache-2.0/), Owner: [milen-denev](https://github.com/milen-denev)).
 
-> [!WARNING]
+> [!TIP]
 > date: 2025-01-18
 >
 > This crates solves [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
