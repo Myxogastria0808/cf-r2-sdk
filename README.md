@@ -90,7 +90,7 @@ async fn main() {
         .set_region(region)
         .create_client();
 
-    object
+    let _ = object
         .upload_binary("text.txt", "text/plain", b"Hello, World!")
         .await;
 
