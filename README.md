@@ -12,7 +12,7 @@ https://github.com/Myxogastria0808/cf-r2-sdk-sample
 
 ## How to use
 
-### 1. Create a aws_sdk_s3::Client object.
+### 1. Create a aws_sdk_s3::Client object
 
 Set the "bucket name", "access key id", "secret access key", "endpoint url", and "region".
 
