@@ -20,7 +20,7 @@ Default value of region is "auto" (region is option field).
 
 ```rust
 // create a client object
-let object = Builder::new()
+let object: cf_r2_sdk::operator::Operator = Builder::new()
     .set_bucket_name("bucket_name")
     .set_access_key_id("access_key_id")
     .set_secret_access_key("secret_access_key")
