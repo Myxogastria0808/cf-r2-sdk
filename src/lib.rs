@@ -32,10 +32,10 @@ mod tests {
             .create_client();
 
         object
-            .upload_binary("text.txt", "text/plain", b"Hello, World!")
+            .upload_binary("test.txt", "text/plain", b"Hello, World!")
             .await;
 
-        let bin = object.download("text.txt").await;
+        let bin = object.download("test.txt").await;
         assert_eq!(bin, b"Hello, World!");
     }
 
