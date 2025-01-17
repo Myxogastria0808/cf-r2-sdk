@@ -60,9 +60,9 @@ let binany: Vec<u8> = object.download("<file name (key)> as &str").await;
 object.delete("<file name (key)> as &str").await;
 ```
 
-## Usage Sample
+## Sample
 
-Usage sample repository is
+Sample repository is
 
 https://github.com/Myxogastria0808/cf-r2-sdk-sample .
 
