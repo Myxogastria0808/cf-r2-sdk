@@ -2,7 +2,7 @@ use aws_sdk_s3::config::{
     Credentials, Region, RequestChecksumCalculation, ResponseChecksumValidation,
 };
 
-use crate::utils::operator::Operator;
+use crate::operator::Operator;
 
 #[derive(Debug)]
 pub struct Builder {

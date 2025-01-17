@@ -5,8 +5,10 @@ authors = ["Myxogastria0808 <r.rstudio.c@gmail.com>"]
 description = "This package is an 'UNOFFICIAL' cloudflare r2 sdk."
 license = "MIT"
 edition = "2024"
-exclude = ["flake.lock", ".env", ".env.example"]
-repository = "https://github.com/Myxogastria0808/r2-unofficial-sdk"
+exclude = ["flake.lock", ".env", ".env.example", "data/"]
+repository = "https://github.com/Myxogastria0808/cf-r2-sdk"
+documentation = "https://docs.rs/cf-r2-sdk"
+keywords = ["cloudflare", "r2", "sdk", "unofficial"]
 
 [dependencies]
 aws-sdk-s3 = { version = "1.69.0", features = ["behavior-version-latest"] }

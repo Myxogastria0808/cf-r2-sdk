@@ -1,4 +1,4 @@
-use aws_sdk_s3::primitives::ByteStream;
+use aws_sdk_s3::{error::SdkError, primitives::ByteStream};
 use tokio::{fs::File, io::AsyncReadExt};
 
 #[derive(Debug)]
@@ -23,8 +23,7 @@ impl Operator {
             .content_type(mime_type)
             .body(ByteStream::from(buffer))
             .send()
-            .await
-            .unwrap();
+            .await;
     }
 
     pub async fn upload_binary(&self, file_name: &str, mime_type: &str, binary: &[u8]) {
