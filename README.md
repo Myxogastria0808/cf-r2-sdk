@@ -9,7 +9,7 @@ This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2
 > [!TIP]
 > date: 2025-01-18
 >
-> This crates solves [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
+> This crates is solved [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
 >
 > ```
 > requestChecksumCalculation: "WHEN_REQUIRED",
