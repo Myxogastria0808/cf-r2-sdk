@@ -8,12 +8,15 @@ pub struct Operator {
 }
 
 impl Operator {
-    pub async fn upload_file(&self, file_name: &str, mime_type: &str, file_path: &str) {
+    pub async fn upload_file(
+        &self,
+        file_name: &str,
+        mime_type: &str,
+        file_path: &str,
+    ) -> Result<(), crate::error::OperationError> {
         let mut file = File::open(file_path).await.expect("Failed to open file");
         let mut buffer = Vec::new();
-        file.read_to_end(&mut buffer)
-            .await
-            .expect("Failed to close file");
+        file.read_to_end(&mut buffer).await?;
 
         let _ = &self
             .client
@@ -23,10 +26,16 @@ impl Operator {
             .content_type(mime_type)
             .body(ByteStream::from(buffer))
             .send()
-            .await;
+            .await?;
+        Ok(())
     }
 
-    pub async fn upload_binary(&self, file_name: &str, mime_type: &str, binary: &[u8]) {
+    pub async fn upload_binary(
+        &self,
+        file_name: &str,
+        mime_type: &str,
+        binary: &[u8],
+    ) -> Result<(), crate::error::OperationError> {
         let _ = &self
             .client
             .put_object()
@@ -35,11 +44,11 @@ impl Operator {
             .content_type(mime_type)
             .body(ByteStream::from(binary.to_vec()))
             .send()
-            .await
-            .unwrap();
+            .await?;
+        Ok(())
     }
 
-    pub async fn download(&self, file_name: &str) -> Vec<u8> {
+    pub async fn download(&self, file_name: &str) -> Result<Vec<u8>, crate::error::OperationError> {
         let object = self
             .client
             .clone()
@@ -47,19 +56,18 @@ impl Operator {
             .bucket(&self.bucket_name)
             .key(file_name)
             .send()
-            .await
-            .unwrap();
-        object.body.collect().await.unwrap().into_bytes().to_vec()
+            .await?;
+        Ok(object.body.collect().await.unwrap().into_bytes().to_vec())
     }
 
-    pub async fn delete(&self, file_name: &str) {
+    pub async fn delete(&self, file_name: &str) -> Result<(), crate::error::OperationError> {
         let _ = &self
             .client
             .delete_object()
             .bucket(&self.bucket_name)
             .key(file_name)
             .send()
-            .await
-            .unwrap();
+            .await?;
+        Ok(())
     }
 }

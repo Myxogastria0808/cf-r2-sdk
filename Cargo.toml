@@ -11,6 +11,7 @@ documentation = "https://docs.rs/cf-r2-sdk"
 keywords = ["cloudflare", "r2", "sdk", "unofficial"]
 
 [dependencies]
+anyhow = "1.0.95"
 aws-sdk-s3 = { version = "1.69.0", features = ["behavior-version-latest"] }
 tokio = { version = "1.43.0", features = ["full"] }
 
