@@ -12,7 +12,7 @@ https://github.com/Myxogastria0808/cf-r2-sdk-sample
 
 ## How to use
 
-1. Create a aws_sdk_s3::Client object.
+### 1. Create a aws_sdk_s3::Client object.
 
 set the "bucket name", "access key id", "secret access key", "endpoint url", and "region".
 
@@ -30,9 +30,9 @@ let object = Builder::new()
 ...
 ```
 
-2. Operate R2 object strage
+### 2. Operate R2 object strage
 
-- upload binary data
+#### upload binary data
 
 ```rust
 object
@@ -40,7 +40,7 @@ object
     .await;
 ```
 
-- upload file
+#### upload file
 
 ```rust
 object
@@ -48,13 +48,13 @@ object
     .await;
 ```
 
-- download binary data
+#### download binary data
 
 ```rust
 let binany: Vec<u8> = object.download("<file name (key)> as &str").await;
 ```
 
-- delete file
+#### delete file
 
 ```rust
 object.delete("<file name (key)> as &str").await;
