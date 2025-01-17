@@ -1,7 +1,8 @@
+/// Error type of cf-r2-sdk.
 #[derive(Debug)]
 pub struct OperationError(pub anyhow::Error);
 
-//anyhow::error => OperationError への型変換
+/// Type conversion to anyhow::error => OperationError
 impl<E> From<E> for OperationError
 where
     E: Into<anyhow::Error>,

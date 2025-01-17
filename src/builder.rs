@@ -1,9 +1,26 @@
+use crate::operator::Operator;
 use aws_sdk_s3::config::{
     Credentials, Region, RequestChecksumCalculation, ResponseChecksumValidation,
 };
 
-use crate::operator::Operator;
-
+/// Builder for creating a new [Operator] instance.
+///
+/// # Example
+///
+/// ```
+/// use cf_r2_sdk::builder::Builder;
+///
+/// #[tokio::main(flavor = "current_thread")]
+/// async fn main() {
+///     let object: cf_r2_sdk::operator::Operator = Builder::new()
+///         .set_bucket_name("bucket_name")
+///         .set_access_key_id("access_key_id")
+///         .set_secret_access_key("secret_access")
+///         .set_endpoint("endpoint_url")
+///         .set_region("auto")
+///         .create_client();
+/// }
+/// ```
 #[derive(Debug)]
 pub struct Builder {
     bucket_name: String,
@@ -27,35 +44,44 @@ impl Default for Builder {
 
 impl Builder {
     pub fn new() -> Self {
+        //! Create a new [Builder] instance with default values.
+        //!
+        //! default value of region is "auto".
         Self::default()
     }
 
     pub fn set_bucket_name(mut self, bucket_name: String) -> Self {
+        //! Set the bucket name.
         self.bucket_name = bucket_name;
         self
     }
 
     pub fn set_access_key_id(mut self, access_key_id: String) -> Self {
+        //! Set the access key id.
         self.access_key_id = access_key_id;
         self
     }
 
     pub fn set_secret_access_key(mut self, secret_access_key: String) -> Self {
+        //! Set the secret access key.
         self.secret_access_key = secret_access_key;
         self
     }
 
     pub fn set_endpoint(mut self, endpoint: String) -> Self {
+        //! Set the endpoint.
         self.endpoint = endpoint;
         self
     }
 
     pub fn set_region(mut self, region: String) -> Self {
+        //! Set the region.
         self.region = region;
         self
     }
 
     pub fn create_client(&self) -> Operator {
+        //! Create a new [Operator] instance.
         let credentials =
             Credentials::new(&self.access_key_id, &self.secret_access_key, None, None, "");
 
