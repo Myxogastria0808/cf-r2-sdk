@@ -4,6 +4,12 @@
 //!
 //! This crates can upload, download, and delete binary data or files to Cloudflare R2.
 //!
+//! # Struct
+//!
+//! [Builder](https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/builder/struct.Builder.html)
+//!
+//! [Operator](https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/operator/struct.Operator.html)
+//!
 //! # How to use
 //!
 //! ### 1. Create a aws_sdk_s3::Client object
