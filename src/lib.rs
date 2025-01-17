@@ -2,7 +2,9 @@
 //!
 //! This is the Cloudflare R2 Operation SDK.
 //!
-//! This crates can upload, download, and delete binary data or files to Cloudflare R2.
+//! It can upload, download, and delete binary data or files to Cloudflare R2.
+//!
+//! This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2-rs) (License: [Apache-2.0](https://choosealicense.com/licenses/apache-2.0/), Owner: [milen-denev](https://github.com/milen-denev)).
 //!
 //! # Struct
 //!

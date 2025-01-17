@@ -1,9 +1,9 @@
 [package]
 name = "cf-r2-sdk"
-version = "0.1.19"
+version = "0.1.20"
 authors = ["Myxogastria0808 <r.rstudio.c@gmail.com>"]
 description = "This package is an 'UNOFFICIAL' cloudflare r2 sdk."
-license = "MIT"
+license = "Apache-2.0"
 edition = "2024"
 exclude = ["flake.lock", ".env", ".env.example", "data/"]
 repository = "https://github.com/Myxogastria0808/cf-r2-sdk"
