@@ -16,7 +16,7 @@
 //! requestChecksumCalculation: "WHEN_REQUIRED",
 //! responseChecksumValidation: "WHEN_REQUIRED",
 //! ```
-//! Reference: https://developers.cloudflare.com/r2/examples/aws/aws-sdk-js-v3/
+//! Reference: [https://developers.cloudflare.com/r2/examples/aws/aws-sdk-js-v3/](https://developers.cloudflare.com/r2/examples/aws/aws-sdk-js-v3/)
 //!
 //! </div>
 //!
