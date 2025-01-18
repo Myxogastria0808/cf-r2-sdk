@@ -10,7 +10,7 @@
 //!
 //! date: 2025-01-18
 //!
-//! This crates is solved [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
+//! This crate is <strong>solved</strong> [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
 //!
 //! ```
 //! requestChecksumCalculation: "WHEN_REQUIRED",
