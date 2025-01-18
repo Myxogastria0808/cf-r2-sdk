@@ -22,7 +22,7 @@ This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2
 
 https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/
 
-# Article (Japanese)
+## Article (Japanese)
 
 https://qiita.com/Yuuki-Osada/items/10734e3d701a519b3d5f
 
