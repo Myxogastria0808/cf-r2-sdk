@@ -4,7 +4,7 @@
 //!
 //! It can upload, download, and delete binary data or files to Cloudflare R2.
 //!
-//! This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2-rs) (License: [Apache-2.0](https://choosealicense.com/licenses/apache-2.0/), Owner: [milen-denev](https://github.com/milen-denev)).
+//! This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2-rs) (License: [Apache-2.0](https://choosealicense.com/licenses/apache-2.0/), Owner: [milen-denev](https://github.com/milen-denev)) and [r2sync](https://crates.io/crates/r2sync) (License: [MIT](https://github.com/Songmu/r2sync/blob/main/LICENSE), Owner: [Songmu](https://github.com/Songmu)).
 //!
 //! <div class="warning">
 //!
