@@ -98,7 +98,7 @@
 //!    object
 //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
 //!        .await?;
-//!   Ok(())
+//!    Ok(())
 //! }
 //! ```
 //!
@@ -135,7 +135,7 @@
 //!    object
 //!        .upload_file("sample.jpg", "image/jpeg", "./data/sample.jpg")
 //!        .await?;
-//!   Ok(())
+//!    Ok(())
 //! }
 //! ```
 //!
@@ -173,10 +173,10 @@
 //!        .await;
 //!
 //!    // download binary data
-//!    object
-//!        .download("sample.txt")
-//!        .await?;
-//!  Ok(())
+//!    let bin: Vec<u8> = object.download("sample.txt").await?;
+//!
+//!    println!("{:?}", bin);
+//!    Ok(())
 //! }
 //! ```
 //!
@@ -217,7 +217,8 @@
 //!    object
 //!        .delete("sample.txt")
 //!        .await?;
-//! Ok(())
+//!
+//!    Ok(())
 //! }
 //! ```
 

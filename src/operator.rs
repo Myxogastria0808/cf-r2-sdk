@@ -251,10 +251,10 @@ impl Operator {
         //!        .await?;
         //!
         //!    // delete file
-        //!    object
-        //!        .delete("sample.txt")
-        //!        .await?;
-        //!   Ok(())
+        //!    let bin: Vec<u8> = object.download("sample.txt").await?;
+        //!
+        //!    println!("{:?}", bin);
+        //!    Ok(())
         //! }
         //! ```
         let _ = &self
