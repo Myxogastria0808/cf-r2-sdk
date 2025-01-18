@@ -1,6 +1,6 @@
-# Cloudflare R2 Operation SDK
+# Unofficial Cloudflare R2 SDK
 
-This is the Cloudflare R2 Operation SDK.
+This is the "Unofficial Cloudflare R2 SDK".
 
 It can upload, download, and delete binary data or files to Cloudflare R2.
 
