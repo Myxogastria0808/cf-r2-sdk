@@ -60,7 +60,7 @@ impl Operator {
         //! use std::env;
         //!
         //! #[tokio::main(flavor = "current_thread")]
-        //! async fn main() {
+        //! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
         //!    // load .env file
         //!    dotenv().expect(".env file not found.");
         //!    // insert a environment variable
@@ -82,9 +82,10 @@ impl Operator {
         //!        .create_client();
         //!
         //!    // upload file
-        //!    let _ = object
+        //!    object
         //!        .upload_file("sample.jpg", "image/jpeg", "./data/sample.jpg")
-        //!        .await;
+        //!        .await?;
+        //!   Ok(())
         //! }
         //! ```
         let mut file = File::open(file_path).await.expect("Failed to open file");
@@ -119,7 +120,7 @@ impl Operator {
         //! use std::env;
         //!
         //! #[tokio::main(flavor = "current_thread")]
-        //! async fn main() {
+        //! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
         //!    // load .env file
         //!    dotenv().expect(".env file not found.");
         //!    // insert a environment variable
@@ -141,9 +142,10 @@ impl Operator {
         //!        .create_client();
         //!
         //!    // upload binary data
-        //!    let _ = object
+        //!    object
         //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
-        //!        .await;
+        //!        .await?;
+        //!    Ok(())
         //! }
         //! ```
         let _ = &self
@@ -169,7 +171,7 @@ impl Operator {
         //! use std::env;
         //!
         //! #[tokio::main(flavor = "current_thread")]
-        //! async fn main() {
+        //! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
         //!    // load .env file
         //!    dotenv().expect(".env file not found.");
         //!    // insert a environment variable
@@ -190,14 +192,15 @@ impl Operator {
         //!        .set_region(region)
         //!        .create_client();
         //!
-        //!    let _ = object
+        //!    object
         //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
-        //!        .await;
+        //!        .await?;
         //!
         //!    // download binary data
-        //!    let _ = object
+        //!    object
         //!        .download("sample.txt")
-        //!        .await;
+        //!        .await?;
+        //!   Ok(())
         //! }
         //! ```
         let object = self
@@ -222,7 +225,7 @@ impl Operator {
         //! use std::env;
         //!
         //! #[tokio::main(flavor = "current_thread")]
-        //! async fn main() {
+        //! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
         //!    // load .env file
         //!    dotenv().expect(".env file not found.");
         //!    // insert a environment variable
@@ -243,14 +246,15 @@ impl Operator {
         //!        .set_region(region)
         //!        .create_client();
         //!
-        //!    let _ = object
+        //!    object
         //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
-        //!        .await;
+        //!        .await?;
         //!
         //!    // delete file
-        //!    let _ = object
+        //!    object
         //!        .delete("sample.txt")
-        //!        .await;
+        //!        .await?;
+        //!   Ok(())
         //! }
         //! ```
         let _ = &self

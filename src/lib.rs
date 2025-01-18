@@ -12,10 +12,9 @@
 //!
 //! This crate is <strong>solved</strong> [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
 //!
-//! ```
 //! requestChecksumCalculation: "WHEN_REQUIRED",
 //! responseChecksumValidation: "WHEN_REQUIRED",
-//! ```
+//!
 //! Reference: [https://developers.cloudflare.com/r2/examples/aws/aws-sdk-js-v3/](https://developers.cloudflare.com/r2/examples/aws/aws-sdk-js-v3/)
 //!
 //! </div>
@@ -74,7 +73,7 @@
 //! use std::env;
 //!
 //! #[tokio::main(flavor = "current_thread")]
-//! async fn main() {
+//! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
 //!    // load .env file
 //!    dotenv().expect(".env file not found.");
 //!    // insert a environment variable
@@ -96,9 +95,10 @@
 //!        .create_client();
 //!
 //!    // upload binary data
-//!    let _ = object
+//!    object
 //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
-//!        .await;
+//!        .await?;
+//!   Ok(())
 //! }
 //! ```
 //!
@@ -110,7 +110,7 @@
 //! use std::env;
 //!
 //! #[tokio::main(flavor = "current_thread")]
-//! async fn main() {
+//! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
 //!    // load .env file
 //!    dotenv().expect(".env file not found.");
 //!    // insert a environment variable
@@ -132,9 +132,10 @@
 //!        .create_client();
 //!
 //!    // upload file
-//!    let _ = object
+//!    object
 //!        .upload_file("sample.jpg", "image/jpeg", "./data/sample.jpg")
-//!        .await;
+//!        .await?;
+//!   Ok(())
 //! }
 //! ```
 //!
@@ -146,7 +147,7 @@
 //! use std::env;
 //!
 //! #[tokio::main(flavor = "current_thread")]
-//! async fn main() {
+//! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
 //!    // load .env file
 //!    dotenv().expect(".env file not found.");
 //!    // insert a environment variable
@@ -167,14 +168,15 @@
 //!        .set_region(region)
 //!        .create_client();
 //!
-//!    let _ = object
+//!     object
 //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
 //!        .await;
 //!
 //!    // download binary data
-//!    let _ = object
+//!    object
 //!        .download("sample.txt")
-//!        .await;
+//!        .await?;
+//!  Ok(())
 //! }
 //! ```
 //!
@@ -186,7 +188,7 @@
 //! use std::env;
 //!
 //! #[tokio::main(flavor = "current_thread")]
-//! async fn main() {
+//! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
 //!    // load .env file
 //!    dotenv().expect(".env file not found.");
 //!    // insert a environment variable
@@ -207,14 +209,15 @@
 //!        .set_region(region)
 //!        .create_client();
 //!
-//!    let _ = object
+//!    object
 //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
 //!        .await;
 //!
 //!    // delete file
-//!    let _ = object
+//!    object
 //!        .delete("sample.txt")
-//!        .await;
+//!        .await?;
+//! Ok(())
 //! }
 //! ```
 
@@ -231,7 +234,7 @@ mod tests {
     use tokio::{fs::File, io::AsyncReadExt};
 
     #[tokio::test]
-    async fn test_upload_and_download_binary() {
+    async fn test_upload_and_download_binary() -> Result<(), error::OperationError> {
         // load .env file
         dotenv().expect(".env file not found.");
         // insert a environment variable
@@ -252,19 +255,20 @@ mod tests {
             .set_region(region)
             .create_client();
 
-        let _ = object
+        object
             .upload_binary("test.txt", "text/plain", b"Hello, World!")
-            .await;
+            .await?;
 
         let bin = object.download("test.txt").await;
         match bin {
             Ok(bin) => assert_eq!(bin, b"Hello, World!"),
             Err(e) => panic!("Error: {:?}", e),
         }
+        Ok(())
     }
 
     #[tokio::test]
-    async fn test_upload_and_download_file() {
+    async fn test_upload_and_download_file() -> Result<(), error::OperationError> {
         // load .env file
         dotenv().expect(".env file not found.");
         // insert a environment variable
@@ -286,9 +290,9 @@ mod tests {
             .create_client();
 
         let file_path = "./data/sample.jpg";
-        let _ = object
+        object
             .upload_file("sample.jpg", "image/jpeg", file_path)
-            .await;
+            .await?;
 
         let bin = object.download("sample.jpg").await;
 
@@ -303,10 +307,11 @@ mod tests {
             Ok(bin) => assert_eq!(bin, buffer),
             Err(e) => panic!("Error: {:?}", e),
         }
+        Ok(())
     }
 
     #[tokio::test]
-    async fn test_upload_and_delete() {
+    async fn test_upload_and_delete() -> Result<(), error::OperationError> {
         // load .env file
         dotenv().expect(".env file not found.");
         // insert a environment variable
@@ -327,15 +332,16 @@ mod tests {
             .set_region(region)
             .create_client();
 
-        let _ = object
+        object
             .upload_binary("text.txt", "text/plain", b"Hello, World!")
-            .await;
+            .await?;
 
-        let _ = object.delete("text.txt").await;
+        object.delete("text.txt").await?;
 
-        let bin = object.download("text.txt").await;
+        let bin: Result<Vec<u8>, error::OperationError> = object.download("text.txt").await;
         if bin.is_ok() {
             panic!("Error: {:?}", bin)
         }
+        Ok(())
     }
 }
