@@ -2,7 +2,7 @@ name: test
 
 on:
   schedule:
-    - cron: "* * * ? * SUN *"
+    - cron: "0 0 * * 7"
   push:
     branches: [ "main" ]
   pull_request:
