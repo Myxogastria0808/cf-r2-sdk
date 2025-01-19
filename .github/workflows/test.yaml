@@ -1,0 +1,24 @@
+name: cf-rs2-sdk
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install Nix
+      uses: cachix/install-nix-action@v27
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - name: nix develop
+      run: nix develop
+    - name: Test
+      run: cargo test
+
