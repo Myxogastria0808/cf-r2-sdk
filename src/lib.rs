@@ -133,7 +133,7 @@
 //!
 //!    // upload file
 //!    object
-//!        .upload_file("sample.jpg", "image/jpeg", "./data/sample.jpg")
+//!        .upload_file("sample.jpg", "image/jpeg", "data/sample.jpg")
 //!        .await?;
 //!    Ok(())
 //! }
@@ -349,6 +349,7 @@ mod tests {
     //* Actions Test *//
     #[tokio::test]
     async fn actions_test_upload_and_download_binary() -> Result<(), error::OperationError> {
+        dotenv().expect(".env file not found.");
         // insert a environment variable
         let bucket_name = env::var("BUCKET_NAME").expect("BUCKET_NAME not found in .env file.");
         let endpoint_url: String =
@@ -381,6 +382,7 @@ mod tests {
 
     #[tokio::test]
     async fn actions_test_upload_and_download_file() -> Result<(), error::OperationError> {
+        dotenv().expect(".env file not found.");
         // insert a environment variable
         let bucket_name = env::var("BUCKET_NAME").expect("BUCKET_NAME not found in .env file.");
         let endpoint_url: String =
@@ -422,6 +424,7 @@ mod tests {
 
     #[tokio::test]
     async fn actions_test_upload_and_delete() -> Result<(), error::OperationError> {
+        dotenv().expect(".env file not found.");
         // insert a environment variable
         let bucket_name = env::var("BUCKET_NAME").expect("BUCKET_NAME not found in .env file.");
         let endpoint_url: String =
