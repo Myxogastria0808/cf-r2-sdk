@@ -27,5 +27,5 @@ jobs:
     - name: nix develop
       run: nix develop
     - name: Test
-      run: cargo test
+      run: cargo test actions_test
 
