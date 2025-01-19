@@ -1,5 +1,10 @@
 # Unofficial Cloudflare R2 SDK
 
+[![test](https://github.com/Myxogastria0808/cf-r2-sdk/actions/workflows/test.yaml/badge.svg)](https://github.com/Myxogastria0808/cf-r2-sdk/actions/workflows/test.yaml)
+![GitHub License](https://img.shields.io/github/license/Myxogastria0808/cf-r2-sdk)
+![GitHub Release](https://img.shields.io/github/v/release/Myxogastria0808/cf-r2-sdk)
+![GitHub Tag](https://img.shields.io/github/v/tag/Myxogastria0808/cf-r2-sdk)
+
 This is the "Unofficial Cloudflare R2 SDK".
 
 It can upload, download, and delete binary data or files to Cloudflare R2.
