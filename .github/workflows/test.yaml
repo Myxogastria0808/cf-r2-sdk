@@ -1,6 +1,8 @@
 name: test
 
 on:
+  schedule:
+    - cron: "* * * ? * SUN *"
   push:
     branches: [ "main" ]
   pull_request:
