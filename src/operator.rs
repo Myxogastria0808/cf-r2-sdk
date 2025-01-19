@@ -160,7 +160,9 @@ impl Operator {
         Ok(())
     }
 
-    pub async fn download(&self, file_name: &str) -> Result<Vec<u8>, crate::error::OperationError> {
+    pub async fn download(
+        &self, file_name: &str
+    ) -> Result<Vec<u8>, crate::error::OperationError> {
         //! Download a file as binary data from the S3 bucket.
         //!
         //! # Example
@@ -214,7 +216,9 @@ impl Operator {
         Ok(object.body.collect().await.unwrap().into_bytes().to_vec())
     }
 
-    pub async fn delete(&self, file_name: &str) -> Result<(), crate::error::OperationError> {
+    pub async fn delete(
+        &self, file_name: &str
+    ) -> Result<(), crate::error::OperationError> {
         //! Delete a file from the S3 bucket.
         //!
         //! # Example
@@ -265,5 +269,31 @@ impl Operator {
             .send()
             .await?;
         Ok(())
+    }
+
+    pub async fn list_objects(
+        &self
+    ) -> Result<Vec<String>, crate::error::OperationError> {
+        let mut response = &mut self
+            .client
+            .list_objects_v2()
+            .bucket(self.bucket_name.to_owned())
+            .max_keys(10) 
+            .into_paginator()
+            .send();
+        let mut objects = Vec::new();
+        while let Some(result) = response.next().await {
+            match result {
+                Ok(output) => {
+                    for object in output.contents() {
+                        objects.push(object.key().unwrap_or("Unknown").to_owned());
+                    }
+                }
+                Err(err) => {
+                    eprintln!("{err:?}")
+                }
+            }
+        }    
+        Ok(objects)
     }
 }
