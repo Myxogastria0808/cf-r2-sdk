@@ -1,4 +1,4 @@
-name: cf-rs2-sdk
+name: test
 
 on:
   push:
