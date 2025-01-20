@@ -274,7 +274,7 @@ impl Operator {
     pub async fn list_objects(
         &self
     ) -> Result<Vec<String>, crate::error::OperationError> {
-        let mut response = &mut self
+        let response = &mut self
             .client
             .list_objects_v2()
             .bucket(self.bucket_name.to_owned())
