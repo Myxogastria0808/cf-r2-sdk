@@ -83,7 +83,7 @@ let _ = object.delete("<file name (key)> as &str").await.unwrap();
 #### get file names vector (max get file names is 10)
 
 ```rust
-let file_names_list:Vec<String> = object.list_object().await.unwrap();
+let file_names_list:Vec<String> = object.list_objects().await.unwrap();
 ```
 
 ## Sample
