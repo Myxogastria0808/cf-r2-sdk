@@ -11,11 +11,3 @@ where
         Self(err.into())
     }
 }
-/// Type conversion 
-/// Implementing the Display trait for OperationError
-// impl std::fmt::Display for OperationError {
-//     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-//         write!(f, "{:?}", self.0)
-//     }
-// }
-// impl std::error::Error for OperationError {}

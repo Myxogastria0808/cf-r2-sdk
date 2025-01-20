@@ -57,7 +57,7 @@ let object: cf_r2_sdk::operator::Operator = Builder::new()
 ```rust
 let _ = object
     .upload_binary("<file name (key)> as &str", "<mime type> as &str", "<binary data> as &[u8]")
-    .await;
+    .await.unwrap();
 ```
 
 #### upload file
@@ -65,19 +65,25 @@ let _ = object
 ```rust
 let _ = object
     .upload_file("<file name (key)> as &str", "<mime type> as &str", "<file path> as &str")
-    .await;
+    .await.unwrap();
 ```
 
 #### download binary data
 
 ```rust
-let binany: Vec<u8> = object.download("<file name (key)> as &str").await;
+let binany: Vec<u8> = object.download("<file name (key)> as &str").await.unwrap();
 ```
 
 #### delete file
 
 ```rust
-let _ = object.delete("<file name (key)> as &str").await;
+let _ = object.delete("<file name (key)> as &str").await.unwrap();
+```
+
+#### get file names vector (max get file names is 10)
+
+```rust
+let file_names_list:Vec<String> = object.list_object().await.unwrap();
 ```
 
 ## Sample

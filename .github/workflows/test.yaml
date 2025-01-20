@@ -29,5 +29,4 @@ jobs:
     - name: nix develop
       run: nix develop
     - name: Test
-      run: cargo test actions_test
-
+      run: cargo test -- --ignored
