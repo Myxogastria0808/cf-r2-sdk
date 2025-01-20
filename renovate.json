@@ -6,6 +6,6 @@
   "timezone": "Asia/Tokyo",
   "dependencyDashboard": false,
   "prConcurrentLimit": 0,
-  "schedule": ["0 0 * * *"],
-  "automergeSchedule": ["0 0 * * 6"]
+  "schedule": ["* 0 * * *"],
+  "automergeSchedule": ["* * * * 6"]
 }
