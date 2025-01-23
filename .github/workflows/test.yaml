@@ -26,7 +26,5 @@ jobs:
       uses: cachix/install-nix-action@v30
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - name: nix develop
-      run: nix develop
     - name: Test
-      run: cargo test -- --ignored
+      run: nix develop --command bash -c "cargo test -- --ignored"
