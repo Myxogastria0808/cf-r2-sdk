@@ -37,7 +37,7 @@ use tokio::{fs::File, io::AsyncReadExt};
 ///        .await;
 /// }
 /// ```
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Operator {
     pub bucket_name: String,
     pub client: aws_sdk_s3::Client,

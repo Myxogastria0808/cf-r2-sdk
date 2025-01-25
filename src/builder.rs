@@ -35,7 +35,7 @@ use aws_sdk_s3::config::{
 ///        .create_client();
 /// }
 /// ```
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Builder {
     bucket_name: String,
     access_key_id: String,
