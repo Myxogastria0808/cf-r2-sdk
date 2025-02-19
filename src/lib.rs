@@ -301,7 +301,7 @@ mod tests {
             .create_client();
 
         object
-            .upload_binary("test.txt", "text/plain", b"Hello, World!")
+            .upload_binary("test.txt", "text/plain", b"Hello, World!", None)
             .await?;
 
         let bin = object.download("test.txt").await;
@@ -336,7 +336,7 @@ mod tests {
 
         let file_path = "./data/sample.jpg";
         object
-            .upload_file("sample.jpg", "image/jpeg", file_path)
+            .upload_file("sample.jpg", "image/jpeg", file_path, None)
             .await?;
 
         let bin = object.download("sample.jpg").await;
@@ -378,7 +378,7 @@ mod tests {
             .create_client();
 
         object
-            .upload_binary("text.txt", "text/plain", b"Hello, World!")
+            .upload_binary("text.txt", "text/plain", b"Hello, World!", None)
             .await?;
 
         object.delete("text.txt").await?;
@@ -440,7 +440,7 @@ mod tests {
             .create_client();
 
         object
-            .upload_binary("test.txt", "text/plain", b"Hello, World!")
+            .upload_binary("test.txt", "text/plain", b"Hello, World!", None)
             .await?;
 
         let bin = object.download("test.txt").await;
@@ -474,7 +474,7 @@ mod tests {
 
         let file_path = "./data/sample.jpg";
         object
-            .upload_file("sample.jpg", "image/jpeg", file_path)
+            .upload_file("sample.jpg", "image/jpeg", file_path, None)
             .await?;
 
         let bin = object.download("sample.jpg").await;
@@ -515,7 +515,7 @@ mod tests {
             .create_client();
 
         object
-            .upload_binary("text.txt", "text/plain", b"Hello, World!")
+            .upload_binary("text.txt", "text/plain", b"Hello, World!", None)
             .await?;
 
         object.delete("text.txt").await?;

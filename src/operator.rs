@@ -49,6 +49,7 @@ impl Operator {
         file_name: &str,
         mime_type: &str,
         file_path: &str,
+        cache_control: Option<&str>,
     ) -> Result<(), crate::error::OperationError> {
         //! Upload a file to the R2 bucket.
         //!
@@ -98,6 +99,7 @@ impl Operator {
             .bucket(&self.bucket_name)
             .key(file_name)
             .content_type(mime_type)
+            .cache_control(cache_control.unwrap_or("no-cache"))
             .body(ByteStream::from(buffer))
             .send()
             .await?;
@@ -109,6 +111,7 @@ impl Operator {
         file_name: &str,
         mime_type: &str,
         binary: &[u8],
+        cache_control: Option<&str>,
     ) -> Result<(), crate::error::OperationError> {
         //! Upload binary data to the R2 bucket.
         //!
@@ -155,6 +158,7 @@ impl Operator {
             .bucket(&self.bucket_name)
             .key(file_name)
             .content_type(mime_type)
+            .cache_control(cache_control.unwrap_or("no-cache"))
             .body(ByteStream::from(binary.to_vec()))
             .send()
             .await?;
