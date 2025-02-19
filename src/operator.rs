@@ -33,7 +33,7 @@ use tokio::{fs::File, io::AsyncReadExt};
 ///        .create_client();
 ///
 ///    let _ = object
-///        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
+///        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
 ///        .await;
 /// }
 /// ```
@@ -84,7 +84,7 @@ impl Operator {
         //!
         //!    // upload file
         //!    object
-        //!        .upload_file("sample.jpg", "image/jpeg", "./data/sample.jpg")
+        //!        .upload_file("sample.jpg", "image/jpeg", "./data/sample.jpg", None)
         //!        .await?;
         //!   Ok(())
         //! }
@@ -146,7 +146,7 @@ impl Operator {
         //!
         //!    // upload binary data
         //!    object
-        //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
+        //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
         //!        .await?;
         //!
         //!    Ok(())
@@ -198,7 +198,7 @@ impl Operator {
         //!        .create_client();
         //!
         //!    object
-        //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
+        //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
         //!        .await?;
         //!
         //!    // download binary data
@@ -252,7 +252,7 @@ impl Operator {
         //!        .create_client();
         //!
         //!    object
-        //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
+        //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
         //!        .await?;
         //!
         //!    // delete file
@@ -305,7 +305,7 @@ impl Operator {
         //!        .create_client();
         //!
         //!    object
-        //!       .upload_binary("sample.txt", "test/plain", b"Hello, World!")
+        //!       .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
         //!       .await?;
         //!
         //!    // get file names vector

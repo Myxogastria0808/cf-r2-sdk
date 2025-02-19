@@ -56,7 +56,7 @@ let object: cf_r2_sdk::operator::Operator = Builder::new()
 
 ```rust
 let _ = object
-    .upload_binary("<file name (key)> as &str", "<mime type> as &str", "<binary data> as &[u8]")
+    .upload_binary("<file name (key)> as &str", "<mime type> as &str", "<binary data> as &[u8]", "<cache> as Option<&str> (None is "no-cache")")
     .await.unwrap();
 ```
 
@@ -64,7 +64,7 @@ let _ = object
 
 ```rust
 let _ = object
-    .upload_file("<file name (key)> as &str", "<mime type> as &str", "<file path> as &str")
+    .upload_file("<file name (key)> as &str", "<mime type> as &str", "<file path> as &str", "<cache> as Option<&str> (None is "no-cache")")
     .await.unwrap();
 ```
 
@@ -120,7 +120,7 @@ async fn main() {
         .create_client();
 
     let _ = object
-        .upload_binary("text.txt", "text/plain", b"Hello, World!")
+        .upload_binary("text.txt", "text/plain", b"Hello, World!", None)
         .await;
 
     let bin: Result<Vec<u8>, cf_r2_sdk::error::OperationError> = object.download("text.txt").await;

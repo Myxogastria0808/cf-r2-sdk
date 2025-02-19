@@ -96,7 +96,7 @@
 //!
 //!    // upload binary data
 //!    object
-//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
+//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
 //!        .await?;
 //!    Ok(())
 //! }
@@ -133,7 +133,7 @@
 //!
 //!    // upload file
 //!    object
-//!        .upload_file("sample.jpg", "image/jpeg", "data/sample.jpg")
+//!        .upload_file("sample.jpg", "image/jpeg", "data/sample.jpg", None)
 //!        .await?;
 //!    Ok(())
 //! }
@@ -169,7 +169,7 @@
 //!        .create_client();
 //!
 //!     object
-//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
+//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
 //!        .await?;
 //!
 //!    // download binary data
@@ -210,7 +210,7 @@
 //!        .create_client();
 //!
 //!    object
-//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
+//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
 //!        .await?;
 //!
 //!    // delete file
@@ -252,7 +252,7 @@
 //!        .create_client();
 //!
 //!    object
-//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!")
+//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
 //!        .await?;
 //!
 //!    // get file names vector
