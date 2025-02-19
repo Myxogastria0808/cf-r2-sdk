@@ -56,7 +56,7 @@ let object: cf_r2_sdk::operator::Operator = Builder::new()
 
 ```rust
 let _ = object
-    .upload_binary("<file name (key)> as &str", "<mime type> as &str", "<binary data> as &[u8]", "<cache> as Option<&str> (None is "no-cache")")
+    .upload_binary("<file name (key)> as &str", "<mime type> as &str", "<binary data> as &[u8]", "<cache> as Option<&str> (None is 'no-cache')")
     .await.unwrap();
 ```
 
