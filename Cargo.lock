@@ -457,7 +457,7 @@ dependencies = [
 
 [[package]]
 name = "cf-r2-sdk"
-version = "3.0.0"
+version = "3.0.1"
 dependencies = [
  "anyhow",
  "aws-sdk-s3",
