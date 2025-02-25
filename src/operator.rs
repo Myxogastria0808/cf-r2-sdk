@@ -89,11 +89,12 @@ impl Operator {
         //!   Ok(())
         //! }
         //! ```
-        let mut file = File::open(file_path).await.expect("Failed to open file");
+        let mut file = File::open(file_path).await?;
+
         let mut buffer = Vec::new();
         file.read_to_end(&mut buffer).await?;
 
-        let _ = &self
+        match &self
             .client
             .put_object()
             .bucket(&self.bucket_name)
@@ -102,7 +103,15 @@ impl Operator {
             .cache_control(cache_control.unwrap_or("no-cache"))
             .body(ByteStream::from(buffer))
             .send()
-            .await?;
+            .await
+        {
+            Ok(_) => (),
+            Err(err) => {
+                return Err(crate::error::OperationError::AWSSdkS3PutObjectError(
+                    err.to_string(),
+                ))
+            }
+        };
         Ok(())
     }
 
@@ -152,7 +161,7 @@ impl Operator {
         //!    Ok(())
         //! }
         //! ```
-        let _ = &self
+        match &self
             .client
             .put_object()
             .bucket(&self.bucket_name)
@@ -161,7 +170,15 @@ impl Operator {
             .cache_control(cache_control.unwrap_or("no-cache"))
             .body(ByteStream::from(binary.to_vec()))
             .send()
-            .await?;
+            .await
+        {
+            Ok(_) => (),
+            Err(err) => {
+                return Err(crate::error::OperationError::AWSSdkS3PutObjectError(
+                    err.to_string(),
+                ))
+            }
+        };
         Ok(())
     }
 
@@ -208,15 +225,27 @@ impl Operator {
         //!   Ok(())
         //! }
         //! ```
-        let object = self
+        let object = match self
             .client
             .clone()
             .get_object()
             .bucket(&self.bucket_name)
             .key(file_name)
             .send()
-            .await?;
-        Ok(object.body.collect().await.unwrap().into_bytes().to_vec())
+            .await
+        {
+            Ok(object) => object,
+            Err(err) => {
+                return Err(crate::error::OperationError::AWSSdkS3GetObjectError(
+                    err.to_string(),
+                ))
+            }
+        };
+        let result = match object.body.collect().await {
+            Ok(result) => result.into_bytes().to_vec(),
+            Err(err) => return Err(crate::error::OperationError::AWSSdkS3ByteStreamError(err)),
+        };
+        Ok(result)
     }
 
     pub async fn delete(&self, file_name: &str) -> Result<(), crate::error::OperationError> {
@@ -262,13 +291,21 @@ impl Operator {
         //!    Ok(())
         //! }
         //! ```
-        let _ = &self
+        match &self
             .client
             .delete_object()
             .bucket(&self.bucket_name)
             .key(file_name)
             .send()
-            .await?;
+            .await
+        {
+            Ok(_) => (),
+            Err(err) => {
+                return Err(crate::error::OperationError::AWSSdkS3DeleteObjectError(
+                    err.to_string(),
+                ))
+            }
+        }
         Ok(())
     }
 
@@ -334,7 +371,9 @@ impl Operator {
                     }
                 }
                 Err(err) => {
-                    eprintln!("{err:?}")
+                    return Err(crate::error::OperationError::AWSSdkS3ListObjectsV2Error(
+                        err.to_string(),
+                    ))
                 }
             }
         }

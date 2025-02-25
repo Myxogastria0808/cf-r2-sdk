@@ -1,13 +1,16 @@
 /// Error type of cf-r2-sdk.
-#[derive(Debug)]
-pub struct OperationError(pub anyhow::Error);
-
-/// Type conversion to anyhow::error => OperationError
-impl<E> From<E> for OperationError
-where
-    E: Into<anyhow::Error>,
-{
-    fn from(err: E) -> Self {
-        Self(err.into())
-    }
+#[derive(Debug, thiserror::Error)]
+pub enum OperationError {
+    #[error(transparent)]
+    FileOpenError(#[from] std::io::Error),
+    #[error("{0}")]
+    AWSSdkS3PutObjectError(String),
+    #[error("{0}")]
+    AWSSdkS3GetObjectError(String),
+    #[error("{0}")]
+    AWSSdkS3DeleteObjectError(String),
+    #[error("{0}")]
+    AWSSdkS3ListObjectsV2Error(String),
+    #[error(transparent)]
+    AWSSdkS3ByteStreamError(#[from] aws_sdk_s3::primitives::ByteStreamError),
 }

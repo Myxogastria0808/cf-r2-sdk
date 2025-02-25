@@ -1,6 +1,6 @@
 [package]
 name = "cf-r2-sdk"
-version = "3.0.1"
+version = "3.0.2"
 authors = ["Myxogastria0808 <r.rstudio.c@gmail.com>"]
 description = "This package is an 'UNOFFICIAL' cloudflare r2 sdk."
 license = "Apache-2.0"
@@ -11,8 +11,8 @@ documentation = "https://docs.rs/cf-r2-sdk"
 keywords = ["cloudflare", "r2", "sdk", "unofficial"]
 
 [dependencies]
-anyhow = "1.0.95"
 aws-sdk-s3 = { version = "1.69.0", features = ["behavior-version-latest"] }
+thiserror = "2.0.11"
 tokio = { version = "1.43.0", features = ["full"] }
 
 [dev-dependencies]
