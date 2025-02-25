@@ -26,6 +26,10 @@ This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2
 
 ## News
 
+- 2025-2-25 (JST): ver. 3.0.2 Release!
+
+  [Relese Summary](https://github.com/Myxogastria0808/cf-r2-sdk/releases/tag/3.0.2)
+
 - 2025-2-19 (JST): ver. 3.0.0 Release!
 
   [Relese Summary](https://github.com/Myxogastria0808/cf-r2-sdk/releases/tag/3.0.0)
