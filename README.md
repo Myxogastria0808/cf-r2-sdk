@@ -137,7 +137,7 @@ async fn main() -> Result<(), Error> {
 
     let _ = object
         .upload_binary("text.txt", "text/plain", b"Hello, World!", None)
-        .await;
+        .await?;
 
     let bin: Result<Vec<u8>, cf_r2_sdk::error::OperationError> = object.download("text.txt").await;
 
