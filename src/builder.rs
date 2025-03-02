@@ -96,10 +96,9 @@ impl Builder {
         self
     }
 
-    #[deprecated]
+    #[deprecated(since = "3.1.0", note = "use create_client_result() instead")]
     pub fn create_client(&self) -> Operator {
         //! Create a new [Operator] instance.
-        //! 👎 Deprecated since 3.1.0: use create_client_result() instead
         let credentials = Credentials::new(
             self.access_key_id
                 .as_ref()
