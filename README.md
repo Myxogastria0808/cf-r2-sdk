@@ -135,7 +135,7 @@ async fn main() -> Result<(), Error> {
         .set_region(region)
         .create_client_result()?;
 
-    let _ = object
+    object
         .upload_binary("text.txt", "text/plain", b"Hello, World!", None)
         .await?;
 
