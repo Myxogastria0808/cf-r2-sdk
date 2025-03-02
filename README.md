@@ -26,13 +26,17 @@ This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2
 
 ## News
 
+- 2025-3-2 (JST): ver. 3.1.0 Release!
+
+  [Release Summary](https://github.com/Myxogastria0808/cf-r2-sdk/releases/tag/3.1.0)
+
 - 2025-2-25 (JST): ver. 3.0.3 Release!
 
-  [Relese Summary](https://github.com/Myxogastria0808/cf-r2-sdk/releases/tag/3.0.3)
+  [Release Summary](https://github.com/Myxogastria0808/cf-r2-sdk/releases/tag/3.0.3)
 
 - 2025-2-19 (JST): ver. 3.0.0 Release!
 
-  [Relese Summary](https://github.com/Myxogastria0808/cf-r2-sdk/releases/tag/3.0.0)
+  [Release Summary](https://github.com/Myxogastria0808/cf-r2-sdk/releases/tag/3.0.0)
 
 ## Documentation
 
@@ -52,13 +56,13 @@ Default value of region is "auto" (region is option field).
 
 ```rust
 // create a client object
-let object: cf_r2_sdk::operator::Operator = Builder::new()
+let object: Result<cf_r2_sdk::operator::Operator, cf_r2_sdk::error::Error> = Builder::new()
     .set_bucket_name("bucket_name")
     .set_access_key_id("access_key_id")
     .set_secret_access_key("secret_access_key")
     .set_endpoint("endpoint_url")
     .set_region("region")
-    .create_client();
+    .create_client_result();
 ```
 
 ### 2. Operate R2 object strage
@@ -105,11 +109,12 @@ https://github.com/Myxogastria0808/cf-r2-sdk-sample .
 
 ```rust
 use cf_r2_sdk::builder::Builder;
+use cf_r2_sdk::error::Error;
 use dotenvy::dotenv;
 use std::env;
 
 #[tokio::main(flavor = "current_thread")]
-async fn main() {
+async fn main() -> Result<(), Error> {
     // load .env file
     dotenv().expect(".env file not found.");
     // insert a environment variable
@@ -128,7 +133,7 @@ async fn main() {
         .set_secret_access_key(secret_access_key)
         .set_endpoint(endpoint_url)
         .set_region(region)
-        .create_client();
+        .create_client_result()?;
 
     let _ = object
         .upload_binary("text.txt", "text/plain", b"Hello, World!", None)
@@ -137,5 +142,6 @@ async fn main() {
     let bin: Result<Vec<u8>, cf_r2_sdk::error::OperationError> = object.download("text.txt").await;
 
     println!("{:?}", bin);
+    Ok(())
 }
 ```

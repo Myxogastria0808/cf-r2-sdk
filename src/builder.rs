@@ -1,4 +1,4 @@
-use crate::operator::Operator;
+use crate::{error::BuilderError, operator::Operator};
 use aws_sdk_s3::config::{
     Credentials, Region, RequestChecksumCalculation, ResponseChecksumValidation,
 };
@@ -9,11 +9,12 @@ use aws_sdk_s3::config::{
 ///
 /// ```
 /// use cf_r2_sdk::builder::Builder;
+/// use cf_r2_sdk::error::Error;
 /// use dotenvy::dotenv;
 /// use std::env;
 ///
 /// #[tokio::main(flavor = "current_thread")]
-/// async fn main() {
+/// async fn main() -> Result<(), Error> {
 ///    // load .env file
 ///    dotenv().expect(".env file not found.");
 ///    // insert a environment variable
@@ -32,25 +33,26 @@ use aws_sdk_s3::config::{
 ///        .set_secret_access_key(secret_access_key)
 ///        .set_endpoint(endpoint_url)
 ///        .set_region(region)
-///        .create_client();
+///        .create_client_result()?;
+///    Ok(())
 /// }
 /// ```
 #[derive(Debug, Clone)]
 pub struct Builder {
-    bucket_name: String,
-    access_key_id: String,
-    secret_access_key: String,
-    endpoint: String,
+    bucket_name: Option<String>,
+    access_key_id: Option<String>,
+    secret_access_key: Option<String>,
+    endpoint: Option<String>,
     region: String,
 }
 
 impl Default for Builder {
     fn default() -> Self {
         Self {
-            bucket_name: String::new(),
-            access_key_id: String::new(),
-            secret_access_key: String::new(),
-            endpoint: String::new(),
+            bucket_name: None,
+            access_key_id: None,
+            secret_access_key: None,
+            endpoint: None,
             region: "auto".to_string(),
         }
     }
@@ -66,25 +68,25 @@ impl Builder {
 
     pub fn set_bucket_name(mut self, bucket_name: String) -> Self {
         //! Set the bucket name.
-        self.bucket_name = bucket_name;
+        self.bucket_name = Some(bucket_name);
         self
     }
 
     pub fn set_access_key_id(mut self, access_key_id: String) -> Self {
         //! Set the access key id.
-        self.access_key_id = access_key_id;
+        self.access_key_id = Some(access_key_id);
         self
     }
 
     pub fn set_secret_access_key(mut self, secret_access_key: String) -> Self {
         //! Set the secret access key.
-        self.secret_access_key = secret_access_key;
+        self.secret_access_key = Some(secret_access_key);
         self
     }
 
     pub fn set_endpoint(mut self, endpoint: String) -> Self {
         //! Set the endpoint.
-        self.endpoint = endpoint;
+        self.endpoint = Some(endpoint);
         self
     }
 
@@ -94,23 +96,70 @@ impl Builder {
         self
     }
 
+    #[deprecated]
     pub fn create_client(&self) -> Operator {
         //! Create a new [Operator] instance.
-        let credentials =
-            Credentials::new(&self.access_key_id, &self.secret_access_key, None, None, "");
+        //! 👎 Deprecated since 3.1.0: use create_client_result() instead
+        let credentials = Credentials::new(
+            self.access_key_id
+                .as_ref()
+                .expect("Access key id is not set."),
+            self.secret_access_key
+                .as_ref()
+                .expect("Secret access key is not set."),
+            None,
+            None,
+            "",
+        );
 
         let config = aws_sdk_s3::config::Builder::new()
             .credentials_provider(credentials)
             .region(Region::new(self.region.clone()))
-            .endpoint_url(&self.endpoint)
+            .endpoint_url(self.endpoint.as_ref().expect("Endpoint is not set."))
             .set_request_checksum_calculation(Some(RequestChecksumCalculation::WhenRequired))
             .set_response_checksum_validation(Some(ResponseChecksumValidation::WhenRequired))
             .clone()
             .build();
 
-        Operator {
-            bucket_name: self.bucket_name.clone(),
-            client: aws_sdk_s3::Client::from_conf(config),
-        }
+        Operator::new(
+            self.bucket_name.clone().expect("Bucket name is not set."),
+            aws_sdk_s3::Client::from_conf(config),
+        )
+    }
+
+    pub fn create_client_result(&self) -> Result<Operator, BuilderError> {
+        //! Create a new [Operator] instance.
+        let bucket_name = match &self.bucket_name {
+            Some(bucket_name) => bucket_name.clone(),
+            None => Err(BuilderError::BucketNameNotSetError)?,
+        };
+        let access_key_id = match &self.access_key_id {
+            Some(access_key_id) => access_key_id,
+            None => Err(BuilderError::AccessKeyIdNotSetError)?,
+        };
+        let secret_access_key = match &self.secret_access_key {
+            Some(secret_access_key) => secret_access_key,
+            None => Err(BuilderError::SecretAccessKeyNotSetError)?,
+        };
+        let endpoint = match &self.endpoint {
+            Some(endpoint) => endpoint,
+            None => Err(BuilderError::EndpointNotSetError)?,
+        };
+
+        let credentials = Credentials::new(access_key_id, secret_access_key, None, None, "");
+
+        let config = aws_sdk_s3::config::Builder::new()
+            .credentials_provider(credentials)
+            .region(Region::new(self.region.clone()))
+            .endpoint_url(endpoint)
+            .set_request_checksum_calculation(Some(RequestChecksumCalculation::WhenRequired))
+            .set_response_checksum_validation(Some(ResponseChecksumValidation::WhenRequired))
+            .clone()
+            .build();
+
+        Ok(Operator::new(
+            bucket_name,
+            aws_sdk_s3::Client::from_conf(config),
+        ))
     }
 }

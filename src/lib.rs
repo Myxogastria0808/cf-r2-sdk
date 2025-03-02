@@ -35,11 +35,12 @@
 //!
 //! ```
 //! use cf_r2_sdk::builder::Builder;
+//! use cf_r2_sdk::error::Error;
 //! use dotenvy::dotenv;
 //! use std::env;
 //!
 //! #[tokio::main(flavor = "current_thread")]
-//! async fn main() {
+//! async fn main() -> Result<(), Error> {
 //!     // load .env file
 //!     dotenv().expect(".env file not found.");
 //!     // insert a environment variable
@@ -58,7 +59,8 @@
 //!         .set_secret_access_key(secret_access_key)
 //!         .set_endpoint(endpoint_url)
 //!         .set_region(region)
-//!         .create_client();
+//!         .create_client_result()?;
+//!     Ok(())
 //! }
 //! ```
 //!
@@ -69,11 +71,12 @@
 //!
 //! ```
 //! use cf_r2_sdk::builder::Builder;
+//! use cf_r2_sdk::error::Error;
 //! use dotenvy::dotenv;
 //! use std::env;
 //!
 //! #[tokio::main(flavor = "current_thread")]
-//! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
+//! async fn main() -> Result<(), Error> {
 //!    // load .env file
 //!    dotenv().expect(".env file not found.");
 //!    // insert a environment variable
@@ -92,7 +95,7 @@
 //!        .set_secret_access_key(secret_access_key)
 //!        .set_endpoint(endpoint_url)
 //!        .set_region(region)
-//!        .create_client();
+//!        .create_client_result()?;
 //!
 //!    // upload binary data
 //!    object
@@ -106,11 +109,12 @@
 //!
 //! ```
 //! use cf_r2_sdk::builder::Builder;
+//! use cf_r2_sdk::error::Error;
 //! use dotenvy::dotenv;
 //! use std::env;
 //!
 //! #[tokio::main(flavor = "current_thread")]
-//! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
+//! async fn main() -> Result<(), Error> {
 //!    // load .env file
 //!    dotenv().expect(".env file not found.");
 //!    // insert a environment variable
@@ -129,7 +133,7 @@
 //!        .set_secret_access_key(secret_access_key)
 //!        .set_endpoint(endpoint_url)
 //!        .set_region(region)
-//!        .create_client();
+//!        .create_client_result()?;
 //!
 //!    // upload file
 //!    object
@@ -143,11 +147,12 @@
 //!
 //! ```
 //! use cf_r2_sdk::builder::Builder;
+//! use cf_r2_sdk::error::Error;
 //! use dotenvy::dotenv;
 //! use std::env;
 //!
 //! #[tokio::main(flavor = "current_thread")]
-//! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
+//! async fn main() -> Result<(), Error> {
 //!    // load .env file
 //!    dotenv().expect(".env file not found.");
 //!    // insert a environment variable
@@ -166,7 +171,7 @@
 //!        .set_secret_access_key(secret_access_key)
 //!        .set_endpoint(endpoint_url)
 //!        .set_region(region)
-//!        .create_client();
+//!        .create_client_result()?;
 //!
 //!     object
 //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
@@ -184,11 +189,12 @@
 //!
 //! ```
 //! use cf_r2_sdk::builder::Builder;
+//! use cf_r2_sdk::error::Error;
 //! use dotenvy::dotenv;
 //! use std::env;
 //!
 //! #[tokio::main(flavor = "current_thread")]
-//! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
+//! async fn main() -> Result<(), Error> {
 //!    // load .env file
 //!    dotenv().expect(".env file not found.");
 //!    // insert a environment variable
@@ -207,7 +213,7 @@
 //!        .set_secret_access_key(secret_access_key)
 //!        .set_endpoint(endpoint_url)
 //!        .set_region(region)
-//!        .create_client();
+//!        .create_client_result()?;
 //!
 //!    object
 //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
@@ -226,11 +232,12 @@
 //!
 //! ```
 //! use cf_r2_sdk::builder::Builder;
+//! use cf_r2_sdk::error::Error;
 //! use dotenvy::dotenv;
 //! use std::env;
 //!
 //! #[tokio::main(flavor = "current_thread")]
-//! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
+//! async fn main() -> Result<(), Error> {
 //!    // load .env file
 //!    dotenv().expect(".env file not found.");
 //!    // insert a environment variable
@@ -249,7 +256,7 @@
 //!        .set_secret_access_key(secret_access_key)
 //!        .set_endpoint(endpoint_url)
 //!        .set_region(region)
-//!        .create_client();
+//!        .create_client_result()?;
 //!
 //!    object
 //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
@@ -272,6 +279,8 @@ pub mod operator;
 
 #[cfg(test)]
 mod tests {
+    use crate::error::Error;
+
     use super::*;
     use builder::Builder;
     use dotenvy::dotenv;
@@ -279,7 +288,7 @@ mod tests {
     use tokio::{fs::File, io::AsyncReadExt};
 
     #[tokio::test]
-    async fn local_test_1_upload_and_download_binary() -> Result<(), error::OperationError> {
+    async fn local_test_1_upload_and_download_binary() -> Result<(), Error> {
         // load .env file
         dotenv().expect(".env file not found.");
         // insert a environment variable
@@ -298,7 +307,7 @@ mod tests {
             .set_secret_access_key(secret_access_key)
             .set_endpoint(endpoint_url)
             .set_region(region)
-            .create_client();
+            .create_client_result()?;
 
         object
             .upload_binary("test.txt", "text/plain", b"Hello, World!", None)
@@ -313,7 +322,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn local_test_2_upload_and_download_file() -> Result<(), error::OperationError> {
+    async fn local_test_2_upload_and_download_file() -> Result<(), Error> {
         // load .env file
         dotenv().expect(".env file not found.");
         // insert a environment variable
@@ -332,7 +341,7 @@ mod tests {
             .set_secret_access_key(secret_access_key)
             .set_endpoint(endpoint_url)
             .set_region(region)
-            .create_client();
+            .create_client_result()?;
 
         let file_path = "./data/sample.jpg";
         object
@@ -356,7 +365,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn local_test_3_upload_and_delete() -> Result<(), error::OperationError> {
+    async fn local_test_3_upload_and_delete() -> Result<(), Error> {
         // load .env file
         dotenv().expect(".env file not found.");
         // insert a environment variable
@@ -375,7 +384,7 @@ mod tests {
             .set_secret_access_key(secret_access_key)
             .set_endpoint(endpoint_url)
             .set_region(region)
-            .create_client();
+            .create_client_result()?;
 
         object
             .upload_binary("text.txt", "text/plain", b"Hello, World!", None)
@@ -391,7 +400,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn local_test_4_list_objects() -> Result<(), error::OperationError> {
+    async fn local_test_4_list_objects() -> Result<(), Error> {
         // load .env file
         dotenv().expect(".env file not found.");
         // insert a environment variable
@@ -410,7 +419,7 @@ mod tests {
             .set_secret_access_key(secret_access_key)
             .set_endpoint(endpoint_url)
             .set_region(region)
-            .create_client();
+            .create_client_result()?;
 
         let _data = object.list_objects().await?;
 
@@ -420,7 +429,7 @@ mod tests {
     //* Actions Test *//
     #[tokio::test]
     #[ignore]
-    async fn actions_test_1_upload_and_download_binary() -> Result<(), error::OperationError> {
+    async fn actions_test_1_upload_and_download_binary() -> Result<(), Error> {
         // insert a environment variable
         let bucket_name = env::var("BUCKET_NAME").expect("BUCKET_NAME not found in .env file.");
         let endpoint_url: String =
@@ -437,7 +446,7 @@ mod tests {
             .set_secret_access_key(secret_access_key)
             .set_endpoint(endpoint_url)
             .set_region(region)
-            .create_client();
+            .create_client_result()?;
 
         object
             .upload_binary("test.txt", "text/plain", b"Hello, World!", None)
@@ -453,7 +462,7 @@ mod tests {
 
     #[tokio::test]
     #[ignore]
-    async fn actions_test_2_upload_and_download_file() -> Result<(), error::OperationError> {
+    async fn actions_test_2_upload_and_download_file() -> Result<(), Error> {
         // insert a environment variable
         let bucket_name = env::var("BUCKET_NAME").expect("BUCKET_NAME not found in .env file.");
         let endpoint_url: String =
@@ -470,7 +479,7 @@ mod tests {
             .set_secret_access_key(secret_access_key)
             .set_endpoint(endpoint_url)
             .set_region(region)
-            .create_client();
+            .create_client_result()?;
 
         let file_path = "./data/sample.jpg";
         object
@@ -495,7 +504,7 @@ mod tests {
 
     #[tokio::test]
     #[ignore]
-    async fn actions_test_3_upload_and_delete() -> Result<(), error::OperationError> {
+    async fn actions_test_3_upload_and_delete() -> Result<(), Error> {
         // insert a environment variable
         let bucket_name = env::var("BUCKET_NAME").expect("BUCKET_NAME not found in .env file.");
         let endpoint_url: String =
@@ -512,7 +521,7 @@ mod tests {
             .set_secret_access_key(secret_access_key)
             .set_endpoint(endpoint_url)
             .set_region(region)
-            .create_client();
+            .create_client_result()?;
 
         object
             .upload_binary("text.txt", "text/plain", b"Hello, World!", None)
@@ -529,7 +538,7 @@ mod tests {
 
     #[tokio::test]
     #[ignore]
-    async fn actions_test_4_list_objects() -> Result<(), error::OperationError> {
+    async fn actions_test_4_list_objects() -> Result<(), Error> {
         // insert a environment variable
         let bucket_name = env::var("BUCKET_NAME").expect("BUCKET_NAME not found in .env file.");
         let endpoint_url: String =
@@ -546,7 +555,7 @@ mod tests {
             .set_secret_access_key(secret_access_key)
             .set_endpoint(endpoint_url)
             .set_region(region)
-            .create_client();
+            .create_client_result()?;
 
         let _data = object.list_objects().await?;
 

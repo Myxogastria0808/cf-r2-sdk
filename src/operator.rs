@@ -7,11 +7,12 @@ use tokio::{fs::File, io::AsyncReadExt};
 ///
 /// ```
 /// use cf_r2_sdk::builder::Builder;
+/// use cf_r2_sdk::error::Error;
 /// use dotenvy::dotenv;
 /// use std::env;
 ///
 /// #[tokio::main(flavor = "current_thread")]
-/// async fn main() {
+/// async fn main() -> Result<(), Error> {
 ///    // load .env file
 ///    dotenv().expect(".env file not found.");
 ///    // insert a environment variable
@@ -30,20 +31,29 @@ use tokio::{fs::File, io::AsyncReadExt};
 ///        .set_secret_access_key(secret_access_key)
 ///        .set_endpoint(endpoint_url)
 ///        .set_region(region)
-///        .create_client();
+///        .create_client_result()?;
 ///
 ///    let _ = object
 ///        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
-///        .await;
+///        .await?;
+///    Ok(())
 /// }
 /// ```
 #[derive(Debug, Clone)]
 pub struct Operator {
-    pub bucket_name: String,
-    pub client: aws_sdk_s3::Client,
+    bucket_name: String,
+    client: aws_sdk_s3::Client,
 }
 
 impl Operator {
+    pub fn new(bucket_name: String, client: aws_sdk_s3::Client) -> Self {
+        //! Create a new [Operator] instance.
+        Self {
+            bucket_name,
+            client,
+        }
+    }
+
     pub async fn upload_file(
         &self,
         file_name: &str,
@@ -57,11 +67,12 @@ impl Operator {
         //!
         //! ```
         //! use cf_r2_sdk::builder::Builder;
+        //! use cf_r2_sdk::error::Error;
         //! use dotenvy::dotenv;
         //! use std::env;
         //!
         //! #[tokio::main(flavor = "current_thread")]
-        //! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
+        //! async fn main() -> Result<(), Error> {
         //!    // load .env file
         //!    dotenv().expect(".env file not found.");
         //!    // insert a environment variable
@@ -80,7 +91,7 @@ impl Operator {
         //!        .set_secret_access_key(secret_access_key)
         //!        .set_endpoint(endpoint_url)
         //!        .set_region(region)
-        //!        .create_client();
+        //!        .create_client_result()?;
         //!
         //!    // upload file
         //!    object
@@ -128,11 +139,12 @@ impl Operator {
         //!
         //! ```
         //! use cf_r2_sdk::builder::Builder;
+        //! use cf_r2_sdk::error::Error;
         //! use dotenvy::dotenv;
         //! use std::env;
         //!
         //! #[tokio::main(flavor = "current_thread")]
-        //! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
+        //! async fn main() -> Result<(), Error> {
         //!    // load .env file
         //!    dotenv().expect(".env file not found.");
         //!    // insert a environment variable
@@ -151,7 +163,7 @@ impl Operator {
         //!        .set_secret_access_key(secret_access_key)
         //!        .set_endpoint(endpoint_url)
         //!        .set_region(region)
-        //!        .create_client();
+        //!        .create_client_result()?;
         //!
         //!    // upload binary data
         //!    object
@@ -189,11 +201,12 @@ impl Operator {
         //!
         //! ```
         //! use cf_r2_sdk::builder::Builder;
+        //! use cf_r2_sdk::error::Error;
         //! use dotenvy::dotenv;
         //! use std::env;
         //!
         //! #[tokio::main(flavor = "current_thread")]
-        //! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
+        //! async fn main() -> Result<(), Error> {
         //!    // load .env file
         //!    dotenv().expect(".env file not found.");
         //!    // insert a environment variable
@@ -212,7 +225,7 @@ impl Operator {
         //!        .set_secret_access_key(secret_access_key)
         //!        .set_endpoint(endpoint_url)
         //!        .set_region(region)
-        //!        .create_client();
+        //!        .create_client_result()?;
         //!
         //!    object
         //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
@@ -255,11 +268,12 @@ impl Operator {
         //!
         //! ```
         //! use cf_r2_sdk::builder::Builder;
+        //! use cf_r2_sdk::error::Error;
         //! use dotenvy::dotenv;
         //! use std::env;
         //!
         //! #[tokio::main(flavor = "current_thread")]
-        //! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
+        //! async fn main() -> Result<(), Error> {
         //!    // load .env file
         //!    dotenv().expect(".env file not found.");
         //!    // insert a environment variable
@@ -278,7 +292,7 @@ impl Operator {
         //!        .set_secret_access_key(secret_access_key)
         //!        .set_endpoint(endpoint_url)
         //!        .set_region(region)
-        //!        .create_client();
+        //!        .create_client_result()?;
         //!
         //!    object
         //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
@@ -316,11 +330,12 @@ impl Operator {
         //!
         //! ```
         //! use cf_r2_sdk::builder::Builder;
+        //! use cf_r2_sdk::error::Error;
         //! use dotenvy::dotenv;
         //! use std::env;
         //!
         //! #[tokio::main(flavor = "current_thread")]
-        //! async fn main() -> Result<(), cf_r2_sdk::error::OperationError> {
+        //! async fn main() -> Result<(), Error> {
         //!    // load .env file
         //!    dotenv().expect(".env file not found.");
         //!    // insert a environment variable
@@ -339,7 +354,7 @@ impl Operator {
         //!        .set_secret_access_key(secret_access_key)
         //!        .set_endpoint(endpoint_url)
         //!        .set_region(region)
-        //!        .create_client();
+        //!        .create_client_result()?;
         //!
         //!    object
         //!       .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
