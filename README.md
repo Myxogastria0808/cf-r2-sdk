@@ -46,6 +46,15 @@ https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/
 
 https://qiita.com/Yuuki-Osada/items/10734e3d701a519b3d5f
 
+## DeepWiki
+
+> [!WARNING]
+> The accuracy of the contents of generated deepwiki has not been verified by me.
+> 
+> I recommend that you look at the documentation at [docs.rs](https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/).
+
+https://deepwiki.com/Myxogastria0808/cf-r2-sdk
+
 ## How to use
 
 ### 1. Create a aws_sdk_s3::Client object
