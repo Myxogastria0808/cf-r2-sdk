@@ -50,7 +50,7 @@ https://qiita.com/Yuuki-Osada/items/10734e3d701a519b3d5f
 
 > [!WARNING]
 > The accuracy of the contents of generated deepwiki has not been verified by me.
-> 
+>
 > I recommend that you look at the documentation at [docs.rs](https://docs.rs/cf-r2-sdk/latest/cf_r2_sdk/).
 
 https://deepwiki.com/Myxogastria0808/cf-r2-sdk
@@ -110,11 +110,9 @@ let _ = object.delete("<file name (key)> as &str").await.unwrap();
 let file_names_list:Vec<String> = object.list_objects().await.unwrap();
 ```
 
-## Sample
+## Example
 
-Sample repository is
-
-https://github.com/Myxogastria0808/cf-r2-sdk-sample .
+https://github.com/Myxogastria0808/cf-r2-sdk/blob/main/examples/simple.rs
 
 ```rust
 use cf_r2_sdk::builder::Builder;
@@ -144,13 +142,10 @@ async fn main() -> Result<(), Error> {
         .set_region(region)
         .create_client_result()?;
 
+    // upload binary data
     object
-        .upload_binary("text.txt", "text/plain", b"Hello, World!", None)
+        .upload_binary("simple.txt", "test/plain", b"Hello, World!", None)
         .await?;
-
-    let bin: Result<Vec<u8>, cf_r2_sdk::error::OperationError> = object.download("text.txt").await;
-
-    println!("{:?}", bin);
     Ok(())
 }
 ```
