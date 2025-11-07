@@ -13,16 +13,16 @@ It can upload, download, and delete binary data or files to Cloudflare R2.
 This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2-rs) (License: [Apache-2.0](https://choosealicense.com/licenses/apache-2.0/), Owner: [milen-denev](https://github.com/milen-denev)) and [r2sync](https://crates.io/crates/r2sync) (License: [MIT](https://github.com/Songmu/r2sync/blob/main/LICENSE), Owner: [Songmu](https://github.com/Songmu)).
 
 > [!TIP]
-> date: 2025-01-18
+> date: 2025-11-07
 >
-> This crates is solved [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
+> The v. 3.2.0 was removed he following S3Client config.
+>
+> The following options were added to resolve [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj). However, since I confirmed it functions correctly without these options, I have removed them.
 >
 > ```
 > requestChecksumCalculation: "WHEN_REQUIRED",
 > responseChecksumValidation: "WHEN_REQUIRED",
 > ```
->
-> Reference: https://developers.cloudflare.com/r2/examples/aws/aws-sdk-js-v3/
 
 ## News
 
@@ -37,6 +37,20 @@ This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2
 - 2025-2-19 (JST): ver. 3.0.0 Release!
 
   [Release Summary](https://github.com/Myxogastria0808/cf-r2-sdk/releases/tag/3.0.0)
+
+  <details>
+  <summary>This crates is solved a problem by adding the following S3Client config.</summary>
+  date: 2025-01-18
+
+  This crates is solved [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
+
+  ```
+  requestChecksumCalculation: "WHEN_REQUIRED",
+  responseChecksumValidation: "WHEN_REQUIRED",
+  ```
+
+  Reference: https://developers.cloudflare.com/r2/examples/aws/aws-sdk-js-v3/
+  </details>
 
 ## Documentation
 

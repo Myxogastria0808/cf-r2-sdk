@@ -115,8 +115,6 @@ impl Builder {
             .credentials_provider(credentials)
             .region(Region::new(self.region.clone()))
             .endpoint_url(self.endpoint.as_ref().expect("Endpoint is not set."))
-            .set_request_checksum_calculation(Some(RequestChecksumCalculation::WhenRequired))
-            .set_response_checksum_validation(Some(ResponseChecksumValidation::WhenRequired))
             .clone()
             .build();
 
