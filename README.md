@@ -15,7 +15,7 @@ This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2
 > [!TIP]
 > date: 2025-11-07
 >
-> The v. 3.2.0 was removed he following S3Client config.
+> The v. 3.2.0 was **removed** he following S3Client config.
 >
 > The following options were added to resolve [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj). However, since I confirmed it functions correctly without these options, I have removed them.
 >
@@ -39,10 +39,10 @@ This crate is based on [cloudflare-r2-rs](https://crates.io/crates/cloudflare-r2
   [Release Summary](https://github.com/Myxogastria0808/cf-r2-sdk/releases/tag/3.0.0)
 
   <details>
-  <summary>This crates is solved a problem by adding the following S3Client config.</summary>
+  <summary>Archive record</summary>
   date: 2025-01-18
 
-  This crates is solved [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
+  This crates is **solved** [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
 
   ```
   requestChecksumCalculation: "WHEN_REQUIRED",
