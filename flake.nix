@@ -21,6 +21,11 @@
         pkgs = import nixpkgs {
           inherit system overlays;
         };
+        toolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+        rustPlatform = pkgs.makeRustPlatform {
+          rustc = toolchain;
+          cargo = toolchain;
+        };
       in
       {
         devShells.default =
@@ -30,7 +35,6 @@
               openssl
               pkg-config
               (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
-              sea-orm-cli
             ];
             RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
           };
