@@ -8,14 +8,14 @@
 //!
 //! <div class="warning">
 //!
-//! date: 2025-01-18
+//! date: 2025-11-07
 //!
-//! This crate is <strong>solved</strong> [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj) by adding the following S3Client config.
+//! The v. 3.2.0 was **removed** the following S3Client config.
+//!
+//! The following options were added to resolve [this problem](https://www.cloudflarestatus.com/incidents/t5nrjmpxc1cj). However, since I confirmed it functions correctly without these options, I have removed them.
 //!
 //! requestChecksumCalculation: "WHEN_REQUIRED",
 //! responseChecksumValidation: "WHEN_REQUIRED",
-//!
-//! Reference: [https://developers.cloudflare.com/r2/examples/aws/aws-sdk-js-v3/](https://developers.cloudflare.com/r2/examples/aws/aws-sdk-js-v3/)
 //!
 //! </div>
 //!
