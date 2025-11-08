@@ -469,7 +469,7 @@ dependencies = [
 
 [[package]]
 name = "cf-r2-sdk"
-version = "3.2.0"
+version = "3.2.1"
 dependencies = [
  "aws-sdk-s3",
  "dotenvy",
