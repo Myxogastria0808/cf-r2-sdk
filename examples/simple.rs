@@ -27,7 +27,7 @@ async fn main() -> Result<(), Error> {
 
     // upload binary data
     object
-        .upload_binary("simple.txt", "test/plain", b"Hello, World!", None)
+        .upload_binary("simple.txt", "text/plain", b"Hello, World!", None)
         .await?;
     Ok(())
 }
