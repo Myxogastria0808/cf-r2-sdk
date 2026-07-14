@@ -99,8 +99,11 @@
 //!
 //!    // upload binary data
 //!    object
-//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
+//!        .upload_binary("doctest_lib_upload_binary.txt", "test/plain", b"Hello, World!", None)
 //!        .await?;
+//!
+//!    // clean up
+//!    object.delete("doctest_lib_upload_binary.txt").await?;
 //!    Ok(())
 //! }
 //! ```
@@ -137,8 +140,11 @@
 //!
 //!    // upload file
 //!    object
-//!        .upload_file("sample.jpg", "image/jpeg", "data/sample.jpg", None)
+//!        .upload_file("doctest_lib_upload_file.jpg", "image/jpeg", "data/sample.jpg", None)
 //!        .await?;
+//!
+//!    // clean up
+//!    object.delete("doctest_lib_upload_file.jpg").await?;
 //!    Ok(())
 //! }
 //! ```
@@ -174,13 +180,16 @@
 //!        .create_client_result()?;
 //!
 //!     object
-//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
+//!        .upload_binary("doctest_lib_download.txt", "test/plain", b"Hello, World!", None)
 //!        .await?;
 //!
 //!    // download binary data
-//!    let bin: Vec<u8> = object.download("sample.txt").await?;
+//!    let bin: Vec<u8> = object.download("doctest_lib_download.txt").await?;
 //!
 //!    println!("{:?}", bin);
+//!
+//!    // clean up
+//!    object.delete("doctest_lib_download.txt").await?;
 //!    Ok(())
 //! }
 //! ```
@@ -216,12 +225,12 @@
 //!        .create_client_result()?;
 //!
 //!    object
-//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
+//!        .upload_binary("doctest_lib_delete.txt", "test/plain", b"Hello, World!", None)
 //!        .await?;
 //!
 //!    // delete file
 //!    object
-//!        .delete("sample.txt")
+//!        .delete("doctest_lib_delete.txt")
 //!        .await?;
 //!
 //!    Ok(())
@@ -259,7 +268,7 @@
 //!        .create_client_result()?;
 //!
 //!    object
-//!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
+//!        .upload_binary("doctest_lib_list_objects.txt", "test/plain", b"Hello, World!", None)
 //!        .await?;
 //!
 //!    // get file names vector
@@ -269,6 +278,8 @@
 //!       println!("{}", file_name);
 //!    }
 //!
+//!    // clean up
+//!    object.delete("doctest_lib_list_objects.txt").await?;
 //!    Ok(())
 //! }
 //! ```
@@ -318,6 +329,8 @@ mod tests {
             Ok(bin) => assert_eq!(bin, b"Hello, World!"),
             Err(e) => panic!("Error: {:?}", e),
         }
+
+        object.delete("test.txt").await?;
         Ok(())
     }
 
@@ -361,6 +374,8 @@ mod tests {
             Ok(bin) => assert_eq!(bin, buffer),
             Err(e) => panic!("Error: {:?}", e),
         }
+
+        object.delete("sample.jpg").await?;
         Ok(())
     }
 
@@ -457,6 +472,8 @@ mod tests {
             Ok(bin) => assert_eq!(bin, b"Hello, World!"),
             Err(e) => panic!("Error: {:?}", e),
         }
+
+        object.delete("test.txt").await?;
         Ok(())
     }
 
@@ -499,6 +516,8 @@ mod tests {
             Ok(bin) => assert_eq!(bin, buffer),
             Err(e) => panic!("Error: {:?}", e),
         }
+
+        object.delete("sample.jpg").await?;
         Ok(())
     }
 

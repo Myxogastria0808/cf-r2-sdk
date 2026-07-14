@@ -29,5 +29,8 @@ async fn main() -> Result<(), Error> {
     object
         .upload_binary("simple.txt", "text/plain", b"Hello, World!", None)
         .await?;
+
+    // clean up
+    object.delete("simple.txt").await?;
     Ok(())
 }

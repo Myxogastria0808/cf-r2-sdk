@@ -34,8 +34,11 @@ use tokio::{fs::File, io::AsyncReadExt};
 ///        .create_client_result()?;
 ///
 ///    let _ = object
-///        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
+///        .upload_binary("doctest_operator_struct.txt", "test/plain", b"Hello, World!", None)
 ///        .await?;
+///
+///    // clean up
+///    object.delete("doctest_operator_struct.txt").await?;
 ///    Ok(())
 /// }
 /// ```
@@ -95,8 +98,11 @@ impl Operator {
         //!
         //!    // upload file
         //!    object
-        //!        .upload_file("sample.jpg", "image/jpeg", "./data/sample.jpg", None)
+        //!        .upload_file("doctest_operator_upload_file.jpg", "image/jpeg", "./data/sample.jpg", None)
         //!        .await?;
+        //!
+        //!    // clean up
+        //!    object.delete("doctest_operator_upload_file.jpg").await?;
         //!   Ok(())
         //! }
         //! ```
@@ -167,9 +173,11 @@ impl Operator {
         //!
         //!    // upload binary data
         //!    object
-        //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
+        //!        .upload_binary("doctest_operator_upload_binary.txt", "test/plain", b"Hello, World!", None)
         //!        .await?;
         //!
+        //!    // clean up
+        //!    object.delete("doctest_operator_upload_binary.txt").await?;
         //!    Ok(())
         //! }
         //! ```
@@ -228,13 +236,16 @@ impl Operator {
         //!        .create_client_result()?;
         //!
         //!    object
-        //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
+        //!        .upload_binary("doctest_operator_download.txt", "test/plain", b"Hello, World!", None)
         //!        .await?;
         //!
         //!    // download binary data
         //!    object
-        //!        .download("sample.txt")
+        //!        .download("doctest_operator_download.txt")
         //!        .await?;
+        //!
+        //!    // clean up
+        //!    object.delete("doctest_operator_download.txt").await?;
         //!   Ok(())
         //! }
         //! ```
@@ -295,13 +306,12 @@ impl Operator {
         //!        .create_client_result()?;
         //!
         //!    object
-        //!        .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
+        //!        .upload_binary("doctest_operator_delete.txt", "test/plain", b"Hello, World!", None)
         //!        .await?;
         //!
         //!    // delete file
-        //!    let bin: Vec<u8> = object.download("sample.txt").await?;
+        //!    object.delete("doctest_operator_delete.txt").await?;
         //!
-        //!    println!("{:?}", bin);
         //!    Ok(())
         //! }
         //! ```
@@ -357,7 +367,7 @@ impl Operator {
         //!        .create_client_result()?;
         //!
         //!    object
-        //!       .upload_binary("sample.txt", "test/plain", b"Hello, World!", None)
+        //!       .upload_binary("doctest_operator_list_objects.txt", "test/plain", b"Hello, World!", None)
         //!       .await?;
         //!
         //!    // get file names vector
@@ -367,6 +377,8 @@ impl Operator {
         //!       println!("{}", file_name);
         //!    }
         //!
+        //!    // clean up
+        //!    object.delete("doctest_operator_list_objects.txt").await?;
         //!    Ok(())
         //! }
         //! ```
